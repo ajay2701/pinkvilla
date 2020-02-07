@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-US" class="has-lab-nav-bottom lab-theme-light">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Pink</title>
+      <link rel="stylesheet" type="text/css" href="pink.css">
+   </head>
+   <body>
+      <div class="container">
+         <div class="wrapper">
+            <div class="wrapper">
+               <div class="pinkdivsinline">
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+                  
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script type="text/javascript" src="jquery.lazy.min.js"></script>
+      
+      <script type="text/javascript">
+        var domain_name = 'https://pinkvilla.com/';
+
+        $.get( "https://cdn.pinkvilla.com/feed/fashion-section.json")
+          .done(function( data ) {
+
+            data.sort(function(x, y) {
+              if (x['viewCount'] > y['viewCount']) {
+                return -1;
+              }
+              if (x < y) {
+                return 1;
+              }
+              return 0;
+            });
+
+
+            $.each( data, function( key, value ) {
+                var div = '<div class="item">'+
+                     '<a href="'+domain_name+value['path']+'">'+
+                        '<img class="lazy"  data-src="'+value['imageUrl']+'" alt="'+value['title']+'" title="'+value['title']+'" width="'+value['image']['width']+'" height="'+value['image']['height']+'" />'+
+                    '</a>'+
+                     '<div class="_descriptions">'+
+                        '<p>'+
+                           '<a href="'+value['path']+'">'+value['title']+'</a>'+
+                        '</p>'+
+                     '</div>'+
+                  '</div>';
+                  $('.pinkdivsinline').append(div);
+            });
+        });
+      </script>
+
+
+       <script type="text/javascript">
+         $( document ).ready(function() {
+            $(function() {
+                 $('.lazy').lazy();
+             });
+         });
+       </script>
+
+
+
+   </body>
+</html>
